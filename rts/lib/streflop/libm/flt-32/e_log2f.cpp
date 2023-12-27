@@ -1,6 +1,6 @@
 /* See the import.pl script for potential modifications */
-/* e_logf.c -- Simple version of e_log.c.
- * Conversion to Simple by Ian Lance Taylor, Cygnus Support, ian@cygnus.com.
+/* e_logf.c -- StreflopSimple version of e_log.c.
+ * Conversion to StreflopSimple by Ian Lance Taylor, Cygnus Support, ian@cygnus.com.
  * adapted for log2 by Ulrich Drepper <drepper@cygnus.com>
  */
 
@@ -36,19 +36,19 @@ Lg6 = 1.5313838422e-01f, /* 3E1CD04F */
 Lg7 = 1.4798198640e-01f; /* 3E178897 */
 
 #ifdef __STDC__
-static const Simple zero   =  0.0f;
+static const StreflopSimple zero   =  0.0f;
 #else
-static Simple zero   =  0.0f;
+static StreflopSimple zero   =  0.0f;
 #endif
 
 #ifdef __STDC__
-	Simple __ieee754_log2f(Simple x)
+	StreflopSimple __ieee754_log2f(StreflopSimple x)
 #else
-	Simple __ieee754_log2f(x)
-	Simple x;
+	StreflopSimple __ieee754_log2f(x)
+	StreflopSimple x;
 #endif
 {
-	Simple hfsq,f,s,z,R,w,t1,t2,dk;
+	StreflopSimple hfsq,f,s,z,R,w,t1,t2,dk;
 	int32_t k,ix,i,j;
 
 	GET_FLOAT_WORD(ix,x);

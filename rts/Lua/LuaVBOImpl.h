@@ -8,7 +8,7 @@
 #include <string>
 #include <algorithm>
 
-#include "lib/lua/include/lua.h" //for lua_Number
+#include "lib/ljSpring/include/lua.h" //for lua_Number
 #include "lib/sol2/forward.hpp"
 
 #include "Rendering/GL/myGL.h"

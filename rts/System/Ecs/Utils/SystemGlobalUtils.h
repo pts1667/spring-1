@@ -5,7 +5,9 @@
 
 #include "System/Ecs/EcsMain.h"
 //#include "System/Ecs/Components/SystemGlobalComponents.h"
-#include "System/creg/creg.h"
+#ifndef NO_CREG
+    #include "System/creg/creg.h"
+#endif
 
 namespace SystemGlobals {
 

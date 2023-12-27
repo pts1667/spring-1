@@ -120,35 +120,35 @@ enum
 };
 
 #ifdef LIBM_COMPILING_FLT32
-    extern int __fpclassifyf(Simple x);
-    extern int __isnanf(Simple x);
-    extern int __isinff(Simple x);
-    inline int fpclassify(Simple x) {return streflop_libm::__fpclassifyf(x);}
-    inline int isnan(Simple x) {return streflop_libm::__isnanf(x);}
-    inline int isinf(Simple x) {return streflop_libm::__isinff(x);}
-    inline int isfinite(Simple x) {return !(isnan(x) || isinf(x));}
-    inline int isnormal(Simple x) {return fpclassify(x) == FP_NORMAL;}
-    inline bool isunordered(Simple x, Simple y) {
+    extern int __fpclassifyf(StreflopSimple x);
+    extern int __isnanf(StreflopSimple x);
+    extern int __isinff(StreflopSimple x);
+    inline int fpclassify(StreflopSimple x) {return streflop_libm::__fpclassifyf(x);}
+    inline int isnan(StreflopSimple x) {return streflop_libm::__isnanf(x);}
+    inline int isinf(StreflopSimple x) {return streflop_libm::__isinff(x);}
+    inline int isfinite(StreflopSimple x) {return !(isnan(x) || isinf(x));}
+    inline int isnormal(StreflopSimple x) {return fpclassify(x) == FP_NORMAL;}
+    inline bool isunordered(StreflopSimple x, StreflopSimple y) {
         return (fpclassify(x) == FP_NAN) || (fpclassify (y) == FP_NAN);
     }
-    inline bool isgreater(Simple x, Simple y) {
+    inline bool isgreater(StreflopSimple x, StreflopSimple y) {
         return (!isunordered(x,y)) && (x > y);
     }
-    inline bool isgreaterequal(Simple x, Simple y) {
+    inline bool isgreaterequal(StreflopSimple x, StreflopSimple y) {
         return (!isunordered(x,y)) && (x >= y);
     }
-    inline bool isless(Simple x, Simple y) {
+    inline bool isless(StreflopSimple x, StreflopSimple y) {
         return (!isunordered(x,y)) && (x < y);
     }
-    inline bool islessequal(Simple x, Simple y) {
+    inline bool islessequal(StreflopSimple x, StreflopSimple y) {
         return (!isunordered(x,y)) && (x <= y);
     }
-    inline bool islessgreater(Simple x, Simple y) {
+    inline bool islessgreater(StreflopSimple x, StreflopSimple y) {
         return (!isunordered(x,y)) && ((x < y) || (x > y));
     }
-    extern const Simple SimplePositiveInfinity;
-    extern const Simple SimpleNegativeInfinity;
-    extern const Simple SimpleNaN;
+    extern const StreflopSimple SimplePositiveInfinity;
+    extern const StreflopSimple SimpleNegativeInfinity;
+    extern const StreflopSimple SimpleNaN;
 #endif
 
 #ifdef LIBM_COMPILING_DBL64
@@ -312,7 +312,7 @@ template<> struct ExtendedConverter<16> {
 
 #define GET_FLOAT_WORD(i,d)                                     \
 do {                                                            \
-  Simple f = (d);                                               \
+  StreflopSimple f = (d);                                               \
   (i) = *reinterpret_cast<streflop::uint32_t*>(&f);                            \
 } while (0)
 

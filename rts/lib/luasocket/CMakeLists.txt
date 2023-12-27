@@ -1,6 +1,6 @@
 # Spring supplied CMake build file
 
-INCLUDE_DIRECTORIES(BEFORE ../lua/include)
+INCLUDE_DIRECTORIES(BEFORE ../ljSpring/include)
 
 SET(luaSocketSources
 	src/auxiliar.cpp

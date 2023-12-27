@@ -6,7 +6,7 @@ include_directories(
 		${Spring_SOURCE_DIR}/rts
 		${Spring_SOURCE_DIR}/include
 		${Spring_SOURCE_DIR}/rts/lib
-		${Spring_SOURCE_DIR}/rts/lib/lua/include
+		${Spring_SOURCE_DIR}/rts/lib/ljSpring/include
 		${SDL2_INCLUDE_DIR}
 		${OPENAL_INCLUDE_DIR}
 	)

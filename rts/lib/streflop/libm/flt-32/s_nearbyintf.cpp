@@ -1,6 +1,6 @@
 /* See the import.pl script for potential modifications */
-/* s_rintf.c -- Simple version of s_rint.c.
- * Conversion to Simple by Ian Lance Taylor, Cygnus Support, ian@cygnus.com.
+/* s_rintf.c -- StreflopSimple version of s_rint.c.
+ * Conversion to StreflopSimple by Ian Lance Taylor, Cygnus Support, ian@cygnus.com.
  */
 /* Adapted for use as nearbyint by Ulrich Drepper <drepper@cygnus.com>.  */
 
@@ -32,16 +32,16 @@ TWO23[2]={
 };
 
 #ifdef __STDC__
-	Simple __nearbyintf(Simple x)
+	StreflopSimple __nearbyintf(StreflopSimple x)
 #else
-	Simple __nearbyintf(x)
-	Simple x;
+	StreflopSimple __nearbyintf(x)
+	StreflopSimple x;
 #endif
 {
 	fpenv_t env;
 	int32_t i0,j0,sx;
 	u_int32_t i,i1;
-	Simple w,t;
+	StreflopSimple w,t;
 	GET_FLOAT_WORD(i0,x);
 	sx = (i0>>31)&1;
 	j0 = ((i0>>23)&0xff)-0x7f;

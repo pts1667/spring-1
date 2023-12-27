@@ -1,6 +1,6 @@
 /* See the import.pl script for potential modifications */
-/* e_sqrtf.c -- Simple version of e_sqrt.c.
- * Conversion to Simple by Ian Lance Taylor, Cygnus Support, ian@cygnus.com.
+/* e_sqrtf.c -- StreflopSimple version of e_sqrt.c.
+ * Conversion to StreflopSimple by Ian Lance Taylor, Cygnus Support, ian@cygnus.com.
  */
 
 /*
@@ -29,13 +29,13 @@ static	Simple	one	= 1.0f, tiny=1.0e-30f;
 #endif
 
 #ifdef __STDC__
-	Simple __ieee754_sqrtf(Simple x)
+	StreflopSimple __ieee754_sqrtf(StreflopSimple x)
 #else
-	Simple __ieee754_sqrtf(x)
-	Simple x;
+	StreflopSimple __ieee754_sqrtf(x)
+	StreflopSimple x;
 #endif
 {
-	Simple z;
+	StreflopSimple z;
 	int32_t sign = (int)0x80000000; 
 	int32_t ix,s,q,m,t,i;
 	u_int32_t r;

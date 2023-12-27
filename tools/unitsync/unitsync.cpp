@@ -10,7 +10,7 @@
 #include <set>
 
 // shared with spring:
-#include "lib/lua/include/LuaInclude.h"
+#include "lib/ljSpring/include/LuaInclude.h"
 #include "Game/GameVersion.h"
 #include "Lua/LuaParser.h"
 #include "Map/MapParser.h"

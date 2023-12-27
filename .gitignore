@@ -24,6 +24,9 @@
 # DoxyGen output
 /doc/doxygen
 
+# Generated docs
+/docs
+
 # doc/manpages
 /manpages
 

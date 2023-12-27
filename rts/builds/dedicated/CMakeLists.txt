@@ -22,7 +22,7 @@ set(ENGINE_SRC_ROOT_DIR "${CMAKE_SOURCE_DIR}/rts")
 ### Assemble libraries
 list(APPEND engineDedicatedLibraries cpuid)
 list(APPEND engineDedicatedLibraries ${Boost_REGEX_LIBRARY})
-list(APPEND engineDedicatedLibraries lua archives 7zip prd::jsoncpp
+list(APPEND engineDedicatedLibraries luajitSpring archives 7zip prd::jsoncpp
 	${SPRING_MINIZIP_LIBRARY} ${ZLIB_LIBRARY} gflags_nothreads_static Tracy::TracyClient)
 list(APPEND engineDedicatedLibraries headlessStubs engineSystemNet)
 list(APPEND engineDedicatedLibraries ${LIBUNWIND_LIBRARIES})
@@ -57,7 +57,7 @@ endif()
 
 ### Assemble the incude dirs
 include_directories(${ENGINE_SRC_ROOT_DIR}/)
-include_directories(${ENGINE_SRC_ROOT_DIR}/lib/lua/include)
+include_directories(${ENGINE_SRC_ROOT_DIR}/lib/ljSpring/include)
 include_directories(${ENGINE_SRC_ROOT_DIR}/lib/7zip)
 include_directories(${ENGINE_SRC_ROOT_DIR}/lib/asio/include)
 

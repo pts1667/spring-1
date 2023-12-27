@@ -5,17 +5,17 @@ namespace streflop {
 
     // Constants
 
-    const Simple SimpleZero(0.0f);
-    const Simple SimplePositiveInfinity = Simple(1.0f) / SimpleZero;
-    const Simple SimpleNegativeInfinity = Simple(-1.0f) / SimpleZero;
+    const StreflopSimple SimpleZero(0.0f);
+    const StreflopSimple SimplePositiveInfinity = Simple(1.0f) / SimpleZero;
+    const StreflopSimple SimpleNegativeInfinity = Simple(-1.0f) / SimpleZero;
     // TODO: non-signaling version
-    const Simple SimpleNaN = SimplePositiveInfinity + SimpleNegativeInfinity;
+    const StreflopSimple SimpleNaN = SimplePositiveInfinity + SimpleNegativeInfinity;
 
-    const Double DoubleZero(0.0f);
-    const Double DoublePositiveInfinity = Double(1.0f) / DoubleZero;
-    const Double DoubleNegativeInfinity = Double(-1.0f) / DoubleZero;
+    const StreflopDouble DoubleZero(0.0f);
+    const StreflopDouble DoublePositiveInfinity = Double(1.0f) / DoubleZero;
+    const StreflopDouble DoubleNegativeInfinity = Double(-1.0f) / DoubleZero;
     // TODO: non-signaling version
-    const Double DoubleNaN = DoublePositiveInfinity + DoubleNegativeInfinity;
+    const StreflopDouble DoubleNaN = DoublePositiveInfinity + DoubleNegativeInfinity;
 
 // Extended are not always available
 #ifdef Extended

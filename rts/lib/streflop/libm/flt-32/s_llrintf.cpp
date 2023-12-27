@@ -24,7 +24,7 @@
 
 #include "math_private.h"
 
-static const Simple two23[2] =
+static const StreflopSimple two23[2] =
 {
   8.3886080000e+06f, /* 0x4B000000 */
  -8.3886080000e+06f, /* 0xCB000000 */
@@ -32,12 +32,12 @@ static const Simple two23[2] =
 
 
 long long int
-__llrintf (Simple x)
+__llrintf (StreflopSimple x)
 {
   int32_t j0;
   u_int32_t i0;
-  Simple w;
-  Simple t;
+  StreflopSimple w;
+  StreflopSimple t;
   long long int result;
   int sx;
 

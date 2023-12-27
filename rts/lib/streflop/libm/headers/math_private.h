@@ -26,19 +26,19 @@ namespace streflop_libm {
 #define __sqrtf __ieee754_sqrtf
 #define fabsf __fabsf
 #define copysignf __copysignf
-extern Simple __log1pf(Simple x);
-extern Simple __fabsf(Simple x);
-extern Simple __atanf(Simple x);
-extern Simple __expm1f(Simple x);
-extern int __isinff(Simple x);
-extern Simple __rintf(Simple x);
-extern Simple __cosf(Simple x);
-extern void __sincosf (Simple x, Simple *sinx, Simple *cosx);
-extern Simple __floorf(Simple x);
-extern Simple __scalbnf (Simple x, int n);
-extern Simple __frexpf(Simple x, int *eptr);
-extern Simple __ldexpf(Simple value, int exp);
-extern int __finitef(Simple x);
+extern StreflopSimple __log1pf(StreflopSimple x);
+extern StreflopSimple __fabsf(StreflopSimple x);
+extern StreflopSimple __atanf(StreflopSimple x);
+extern StreflopSimple __expm1f(StreflopSimple x);
+extern int __isinff(StreflopSimple x);
+extern StreflopSimple __rintf(StreflopSimple x);
+extern StreflopSimple __cosf(StreflopSimple x);
+extern void __sincosf (StreflopSimple x, StreflopSimple *sinx, StreflopSimple *cosx);
+extern StreflopSimple __floorf(StreflopSimple x);
+extern StreflopSimple __scalbnf (StreflopSimple x, int n);
+extern StreflopSimple __frexpf(StreflopSimple x, int *eptr);
+extern StreflopSimple __ldexpf(StreflopSimple value, int exp);
+extern int __finitef(StreflopSimple x);
 #endif
 
 #ifdef LIBM_COMPILING_DBL64
@@ -123,57 +123,57 @@ extern inline Double __copysign (Double x, Double y)
 #endif
 #endif
 
-/* ieee style elementary Simple functions */
+/* ieee style elementary StreflopSimple functions */
 #ifdef LIBM_COMPILING_FLT32
-extern Simple __ieee754_sqrtf (Simple);
-extern Simple __ieee754_acosf (Simple);
-extern Simple __ieee754_acoshf (Simple);
-extern Simple __ieee754_logf (Simple);
-extern Simple __ieee754_atanhf (Simple);
-extern Simple __ieee754_asinf (Simple);
-extern Simple __ieee754_atan2f (Simple,Simple);
-extern Simple __ieee754_expf (Simple);
-extern Simple __ieee754_exp2f (Simple);
-extern Simple __ieee754_exp10f (Simple);
-extern Simple __ieee754_coshf (Simple);
-extern Simple __ieee754_fmodf (Simple,Simple);
-extern Simple __ieee754_powf (Simple,Simple);
-extern Simple __ieee754_lgammaf_r (Simple,int *);
-extern Simple __ieee754_gammaf_r (Simple,int *);
-extern Simple __ieee754_lgammaf (Simple);
-extern Simple __ieee754_gammaf (Simple);
-extern Simple __ieee754_log10f (Simple);
-extern Simple __ieee754_log2f (Simple);
-extern Simple __ieee754_sinhf (Simple);
-extern Simple __ieee754_hypotf (Simple,Simple);
-extern Simple __ieee754_j0f (Simple);
-extern Simple __ieee754_j1f (Simple);
-extern Simple __ieee754_y0f (Simple);
-extern Simple __ieee754_y1f (Simple);
-extern Simple __ieee754_jnf (int,Simple);
-extern Simple __ieee754_ynf (int,Simple);
-extern Simple __ieee754_remainderf (Simple,Simple);
+extern StreflopSimple __ieee754_sqrtf (Simple);
+extern StreflopSimple __ieee754_acosf (Simple);
+extern StreflopSimple __ieee754_acoshf (Simple);
+extern StreflopSimple __ieee754_logf (Simple);
+extern StreflopSimple __ieee754_atanhf (Simple);
+extern StreflopSimple __ieee754_asinf (Simple);
+extern StreflopSimple __ieee754_atan2f (Simple,Simple);
+extern StreflopSimple __ieee754_expf (Simple);
+extern StreflopSimple __ieee754_exp2f (Simple);
+extern StreflopSimple __ieee754_exp10f (Simple);
+extern StreflopSimple __ieee754_coshf (Simple);
+extern StreflopSimple __ieee754_fmodf (Simple,Simple);
+extern StreflopSimple __ieee754_powf (Simple,Simple);
+extern StreflopSimple __ieee754_lgammaf_r (Simple,int *);
+extern StreflopSimple __ieee754_gammaf_r (Simple,int *);
+extern StreflopSimple __ieee754_lgammaf (Simple);
+extern StreflopSimple __ieee754_gammaf (Simple);
+extern StreflopSimple __ieee754_log10f (Simple);
+extern StreflopSimple __ieee754_log2f (Simple);
+extern StreflopSimple __ieee754_sinhf (Simple);
+extern StreflopSimple __ieee754_hypotf (Simple,Simple);
+extern StreflopSimple __ieee754_j0f (Simple);
+extern StreflopSimple __ieee754_j1f (Simple);
+extern StreflopSimple __ieee754_y0f (Simple);
+extern StreflopSimple __ieee754_y1f (Simple);
+extern StreflopSimple __ieee754_jnf (int,Simple);
+extern StreflopSimple __ieee754_ynf (int,Simple);
+extern StreflopSimple __ieee754_remainderf (Simple,Simple);
 extern int32_t __ieee754_rem_pio2f (Simple,Simple*);
-extern Simple __ieee754_scalbf (Simple,Simple);
+extern StreflopSimple __ieee754_scalbf (Simple,Simple);
 #endif
 
 
-/* Simple versions of fdlibm kernel functions */
+/* StreflopSimple versions of fdlibm kernel functions */
 #ifdef LIBM_COMPILING_FLT32
-extern Simple __kernel_sinf (Simple,Simple,int);
-extern Simple __kernel_cosf (Simple,Simple);
-extern Simple __kernel_tanf (Simple,Simple,int);
+extern StreflopSimple __kernel_sinf (Simple,Simple,int);
+extern StreflopSimple __kernel_cosf (Simple,Simple);
+extern StreflopSimple __kernel_tanf (Simple,Simple,int);
 extern int   __kernel_rem_pio2f (Simple*,Simple*,int,int,int, const int32_t*);
 #endif
 
 /* internal functions.  */
 #ifdef LIBM_COMPILING_FLT32
-extern Simple __copysignf (Simple x, Simple __y);
+extern StreflopSimple __copysignf (StreflopSimple x, StreflopSimple __y);
 #endif
 
 #if 0
 #ifdef LIBM_COMPILING_FLT32
-extern inline Simple __copysignf (Simple x, Simple y)
+extern inline StreflopSimple __copysignf (StreflopSimple x, StreflopSimple y)
 { return __builtin_copysignf (x, y); }
 #endif
 #endif

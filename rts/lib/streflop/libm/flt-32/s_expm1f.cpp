@@ -1,6 +1,6 @@
 /* See the import.pl script for potential modifications */
-/* s_expm1f.c -- Simple version of s_expm1.c.
- * Conversion to Simple by Ian Lance Taylor, Cygnus Support, ian@cygnus.com.
+/* s_expm1f.c -- StreflopSimple version of s_expm1.c.
+ * Conversion to StreflopSimple by Ian Lance Taylor, Cygnus Support, ian@cygnus.com.
  */
 
 /*
@@ -21,8 +21,8 @@ static char rcsid[] = "$NetBSD: s_expm1f.c,v 1.5f 1995/05/10 20:47:11 jtc Exp $"
 #include "SMath.h"
 #include "math_private.h"
 
-static const Simple huge = 1.0e+30f;
-static const Simple tiny = 1.0e-30f;
+static const StreflopSimple huge = 1.0e+30f;
+static const StreflopSimple tiny = 1.0e-30f;
 
 namespace streflop_libm {
 #ifdef __STDC__
@@ -43,13 +43,13 @@ Q4  =   4.0082177293e-06f, /* 0x36867e54 */
 Q5  =  -2.0109921195e-07f; /* 0xb457edbb */
 
 #ifdef __STDC__
-	Simple __expm1f(Simple x)
+	StreflopSimple __expm1f(StreflopSimple x)
 #else
-	Simple __expm1f(x)
-	Simple x;
+	StreflopSimple __expm1f(x)
+	StreflopSimple x;
 #endif
 {
-	Simple y,hi,lo,c,t,e,hxs,hfx,r1;
+	StreflopSimple y,hi,lo,c,t,e,hxs,hfx,r1;
 	int32_t k,xsb;
 	u_int32_t hx;
 

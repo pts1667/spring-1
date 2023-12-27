@@ -11,7 +11,7 @@ find_package_static(ZLIB REQUIRED)
 
 list(APPEND unitsync_libs cpuid)
 list(APPEND unitsync_libs ${CMAKE_DL_LIBS})
-list(APPEND unitsync_libs 7zip prd::jsoncpp lua headlessStubs archives)
+list(APPEND unitsync_libs 7zip prd::jsoncpp luajitSpring headlessStubs archives)
 list(APPEND unitsync_libs ${ZLIB_LIBRARY})
 list(APPEND unitsync_libs ${SPRING_MINIZIP_LIBRARY})
 
@@ -46,7 +46,7 @@ set(ENGINE_SRC_ROOT "../../rts")
 
 include_directories(${SPRING_MINIZIP_INCLUDE_DIR})
 include_directories(${ENGINE_SRC_ROOT}/lib)
-include_directories(${ENGINE_SRC_ROOT}/lib/lua/include)
+include_directories(${ENGINE_SRC_ROOT}/lib/ljSpring/include)
 include_directories(${ENGINE_SRC_ROOT}/lib/7zip)
 include_directories(${ENGINE_SRC_ROOT})
 include_directories(${CMAKE_BINARY_DIR}/src-generated/engine)

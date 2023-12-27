@@ -1,6 +1,6 @@
 /* See the import.pl script for potential modifications */
-/* e_jnf.c -- Simple version of e_jn.c.
- * Conversion to Simple by Ian Lance Taylor, Cygnus Support, ian@cygnus.com.
+/* e_jnf.c -- StreflopSimple version of e_jn.c.
+ * Conversion to StreflopSimple by Ian Lance Taylor, Cygnus Support, ian@cygnus.com.
  */
 
 /*
@@ -31,21 +31,21 @@ two   =  2.0000000000e+00f, /* 0x40000000 */
 one   =  1.0000000000e+00f; /* 0x3F800000 */
 
 #ifdef __STDC__
-static const Simple zero  =  0.0000000000e+00f;
+static const StreflopSimple zero  =  0.0000000000e+00f;
 #else
-static Simple zero  =  0.0000000000e+00f;
+static StreflopSimple zero  =  0.0000000000e+00f;
 #endif
 
 #ifdef __STDC__
-	Simple __ieee754_jnf(int n, Simple x)
+	StreflopSimple __ieee754_jnf(int n, StreflopSimple x)
 #else
-	Simple __ieee754_jnf(n,x)
-	int n; Simple x;
+	StreflopSimple __ieee754_jnf(n,x)
+	int n; StreflopSimple x;
 #endif
 {
 	int32_t i,hx,ix, sgn;
-	Simple a, b, temp, di;
-	Simple z, w;
+	StreflopSimple a, b, temp, di;
+	StreflopSimple z, w;
 
     /* J(-n,x) = (-1)^n * J(n, x), J(n, -x) = (-1)^n * J(n, x)
      * Thus, J(-n,x) = J(n,-x)
@@ -119,8 +119,8 @@ static Simple zero  =  0.0000000000e+00f;
 		 * When Q(k) > 1e17	good for quadruple
 		 */
 	    /* determine k */
-		Simple t,v;
-		Simple q0,q1,h,tmp; int32_t k,m;
+		StreflopSimple t,v;
+		StreflopSimple q0,q1,h,tmp; int32_t k,m;
 		w  = (n+n)/(Simple)x; h = (Simple)2.0f/(Simple)x;
 		q0 = w;  z = w+h; q1 = w*z - (Simple)1.0f; k=1;
 		while(q1<(Simple)1.0e9f) {
@@ -174,16 +174,16 @@ static Simple zero  =  0.0000000000e+00f;
 }
 
 #ifdef __STDC__
-	Simple __ieee754_ynf(int n, Simple x)
+	StreflopSimple __ieee754_ynf(int n, StreflopSimple x)
 #else
-	Simple __ieee754_ynf(n,x)
-	int n; Simple x;
+	StreflopSimple __ieee754_ynf(n,x)
+	int n; StreflopSimple x;
 #endif
 {
 	int32_t i,hx,ix;
 	u_int32_t ib;
 	int32_t sign;
-	Simple a, b, temp;
+	StreflopSimple a, b, temp;
 
 	GET_FLOAT_WORD(hx,x);
 	ix = 0x7fffffff&hx;

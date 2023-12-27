@@ -1,6 +1,6 @@
 /* See the import.pl script for potential modifications */
-/* k_rem_pio2f.c -- Simple version of k_rem_pio2.c
- * Conversion to Simple by Ian Lance Taylor, Cygnus Support, ian@cygnus.com.
+/* k_rem_pio2f.c -- StreflopSimple version of k_rem_pio2.c
+ * Conversion to StreflopSimple by Ian Lance Taylor, Cygnus Support, ian@cygnus.com.
  */
 
 /*
@@ -21,7 +21,7 @@ static char rcsid[] = "$NetBSD: k_rem_pio2f.c,v 1.4f 1995/05/10 20:46:28 jtc Exp
 #include "SMath.h"
 #include "math_private.h"
 
-/* In the Simple version, the input parameter x contains 8 bit
+/* In the StreflopSimple version, the input parameter x contains 8 bit
    integers, not 24 bit integers.  113 bit precision is not supported.  */
 
 namespace streflop_libm {
@@ -32,9 +32,9 @@ static int init_jk[] = {4,7,9};
 #endif
 
 #ifdef __STDC__
-static const Simple PIo2[] = {
+static const StreflopSimple PIo2[] = {
 #else
-static Simple PIo2[] = {
+static StreflopSimple PIo2[] = {
 #endif
   1.5703125000e+00f, /* 0x3fc90000 */
   4.5776367188e-04f, /* 0x39f00000 */
@@ -60,14 +60,14 @@ two8   =  2.5600000000e+02f, /* 0x43800000 */
 twon8  =  3.9062500000e-03f; /* 0x3b800000 */
 
 #ifdef __STDC__
-	int __kernel_rem_pio2f(Simple *x, Simple *y, int e0, int nx, int prec, const int32_t *ipio2) 
+	int __kernel_rem_pio2f(StreflopSimple *x, StreflopSimple *y, int e0, int nx, int prec, const int32_t *ipio2) 
 #else
 	int __kernel_rem_pio2f(x,y,e0,nx,prec,ipio2) 	
-	Simple x[], y[]; int e0,nx,prec; int32_t ipio2[];
+	StreflopSimple x[], y[]; int e0,nx,prec; int32_t ipio2[];
 #endif
 {
 	int32_t jz,jx,jv,jp,jk,carry,n,iq[20],i,j,k,m,q0,ih;
-	Simple z,fw,f[20],fq[20],q[20];
+	StreflopSimple z,fw,f[20],fq[20],q[20];
 
     /* initialize jk*/
 	jk = init_jk[prec];

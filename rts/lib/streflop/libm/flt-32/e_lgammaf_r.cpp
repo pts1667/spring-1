@@ -1,6 +1,6 @@
 /* See the import.pl script for potential modifications */
-/* e_lgammaf_r.c -- Simple version of e_lgamma_r.c.
- * Conversion to Simple by Ian Lance Taylor, Cygnus Support, ian@cygnus.com.
+/* e_lgammaf_r.c -- StreflopSimple version of e_lgamma_r.c.
+ * Conversion to StreflopSimple by Ian Lance Taylor, Cygnus Support, ian@cygnus.com.
  */
 
 /*
@@ -95,19 +95,19 @@ w5  =  8.3633989561e-04f, /* 0x3a5b3dd2 */
 w6  = -1.6309292987e-03f; /* 0xbad5c4e8 */
 
 #ifdef __STDC__
-static const Simple zero=  0.0000000000e+00f;
+static const StreflopSimple zero=  0.0000000000e+00f;
 #else
-static Simple zero=  0.0000000000e+00f;
+static StreflopSimple zero=  0.0000000000e+00f;
 #endif
 
 #ifdef __STDC__
-	static Simple sin_pif(Simple x)
+	static StreflopSimple sin_pif(StreflopSimple x)
 #else
-	static Simple sin_pif(x)
-	Simple x;
+	static StreflopSimple sin_pif(x)
+	StreflopSimple x;
 #endif
 {
-	Simple y,z;
+	StreflopSimple y,z;
 	int n,ix;
 
 	GET_FLOAT_WORD(ix,x);
@@ -151,13 +151,13 @@ static Simple zero=  0.0000000000e+00f;
 
 
 #ifdef __STDC__
-	Simple __ieee754_lgammaf_r(Simple x, int *signgamp)
+	StreflopSimple __ieee754_lgammaf_r(StreflopSimple x, int *signgamp)
 #else
-	Simple __ieee754_lgammaf_r(x,signgamp)
-	Simple x; int *signgamp;
+	StreflopSimple __ieee754_lgammaf_r(x,signgamp)
+	StreflopSimple x; int *signgamp;
 #endif
 {
-	Simple t,y,z,nadj,p,p1,p2,p3,q,r,w;
+	StreflopSimple t,y,z,nadj,p,p1,p2,p3,q,r,w;
 	int i,hx,ix;
 
 	GET_FLOAT_WORD(hx,x);

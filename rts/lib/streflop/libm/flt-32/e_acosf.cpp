@@ -1,6 +1,6 @@
 /* See the import.pl script for potential modifications */
-/* e_acosf.c -- Simple version of e_acos.c.
- * Conversion to Simple by Ian Lance Taylor, Cygnus Support, ian@cygnus.com.
+/* e_acosf.c -- StreflopSimple version of e_acos.c.
+ * Conversion to StreflopSimple by Ian Lance Taylor, Cygnus Support, ian@cygnus.com.
  */
 
 /*
@@ -23,9 +23,9 @@ static char rcsid[] = "$NetBSD: e_acosf.c,v 1.5f 1995/05/12 04:57:16 jtc Exp $";
 
 namespace streflop_libm {
 #ifdef __STDC__
-static const Simple 
+static const StreflopSimple 
 #else
-static Simple 
+static StreflopSimple 
 #endif
 one =  1.0000000000e+00f, /* 0x3F800000 */
 pi =  3.1415925026e+00f, /* 0x40490fda */
@@ -43,13 +43,13 @@ qS3 = -6.8828397989e-01f, /* 0xbf303361 */
 qS4 =  7.7038154006e-02f; /* 0x3d9dc62e */
 
 #ifdef __STDC__
-	Simple __ieee754_acosf(Simple x)
+	StreflopSimple __ieee754_acosf(StreflopSimple x)
 #else
-	Simple __ieee754_acosf(x)
-	Simple x;
+	StreflopSimple __ieee754_acosf(x)
+	StreflopSimple x;
 #endif
 {
-	Simple z,p,q,r,w,s,c,df;
+	StreflopSimple z,p,q,r,w,s,c,df;
 	int32_t hx,ix;
 	GET_FLOAT_WORD(hx,x);
 	ix = hx&0x7fffffff;

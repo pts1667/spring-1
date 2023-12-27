@@ -1,6 +1,6 @@
 /* See the import.pl script for potential modifications */
-/* s_frexpf.c -- Simple version of s_frexp.c.
- * Conversion to Simple by Ian Lance Taylor, Cygnus Support, ian@cygnus.com.
+/* s_frexpf.c -- StreflopSimple version of s_frexp.c.
+ * Conversion to StreflopSimple by Ian Lance Taylor, Cygnus Support, ian@cygnus.com.
  */
 
 /*
@@ -30,10 +30,10 @@ static Simple
 two25 =  3.3554432000e+07f; /* 0x4c000000 */
 
 #ifdef __STDC__
-	Simple __frexpf(Simple x, int *eptr)
+	StreflopSimple __frexpf(StreflopSimple x, int *eptr)
 #else
-	Simple __frexpf(x, eptr)
-	Simple x; int *eptr;
+	StreflopSimple __frexpf(x, eptr)
+	StreflopSimple x; int *eptr;
 #endif
 {
 	int32_t hx,ix;

@@ -8,7 +8,7 @@
 //FIXME#include "LuaArrays.h"
 #include "LuaContextData.h"
 #include "LuaHashString.h"
-#include "lib/lua/include/LuaInclude.h" //FIXME needed for GetLuaContextData
+#include "lib/ljSpring/include/LuaInclude.h" //FIXME needed for GetLuaContextData
 
 #include <map>
 #include <string>

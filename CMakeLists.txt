@@ -8,7 +8,7 @@ list(APPEND CMAKE_MODULE_PATH "${CMAKE_MODULES_SPRING}")
 # enable flag overrides for compilers
 set(CMAKE_USER_MAKE_RULES_OVERRIDE "${CMAKE_MODULES_SPRING}/OverrideFlags.cmake")
 
-project(Spring)
+project(Spring LANGUAGES C CXX ASM)
 
 add_definitions(-DFMT_HEADER_ONLY) #for fmt lib
 

@@ -1,6 +1,6 @@
 /* See the import.pl script for potential modifications */
-/* s_asinhf.c -- Simple version of s_asinh.c.
- * Conversion to Simple by Ian Lance Taylor, Cygnus Support, ian@cygnus.com.
+/* s_asinhf.c -- StreflopSimple version of s_asinh.c.
+ * Conversion to StreflopSimple by Ian Lance Taylor, Cygnus Support, ian@cygnus.com.
  */
 
 /*
@@ -32,13 +32,13 @@ ln2 =  6.9314718246e-01f, /* 0x3f317218 */
 huge=  1.0000000000e+30f;
 
 #ifdef __STDC__
-	Simple __asinhf(Simple x)
+	StreflopSimple __asinhf(StreflopSimple x)
 #else
-	Simple __asinhf(x)
-	Simple x;
+	StreflopSimple __asinhf(x)
+	StreflopSimple x;
 #endif
 {
-	Simple t,w;
+	StreflopSimple t,w;
 	int32_t hx,ix;
 	GET_FLOAT_WORD(hx,x);
 	ix = hx&0x7fffffff;

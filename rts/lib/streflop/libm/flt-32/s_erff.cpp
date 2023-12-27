@@ -1,6 +1,6 @@
 /* See the import.pl script for potential modifications */
-/* s_erff.c -- Simple version of s_erf.c.
- * Conversion to Simple by Ian Lance Taylor, Cygnus Support, ian@cygnus.com.
+/* s_erff.c -- StreflopSimple version of s_erf.c.
+ * Conversion to StreflopSimple by Ian Lance Taylor, Cygnus Support, ian@cygnus.com.
  */
 
 /*
@@ -102,14 +102,14 @@ sb6  =  4.7452853394e+02f, /* 0x43ed43a7 */
 sb7  = -2.2440952301e+01f; /* 0xc1b38712 */
 
 #ifdef __STDC__
-	Simple __erff(Simple x)
+	StreflopSimple __erff(StreflopSimple x)
 #else
-	Simple __erff(x)
-	Simple x;
+	StreflopSimple __erff(x)
+	StreflopSimple x;
 #endif
 {
 	int32_t hx,ix,i;
-	Simple R,S,P,Q,s,y,z,r;
+	StreflopSimple R,S,P,Q,s,y,z,r;
 	GET_FLOAT_WORD(hx,x);
 	ix = hx&0x7fffffff;
 	if(ix>=0x7f800000) {		/* erf(nan)=nan */
@@ -160,14 +160,14 @@ sb7  = -2.2440952301e+01f; /* 0xc1b38712 */
 weak_alias (__erff, erff)
 
 #ifdef __STDC__
-	Simple __erfcf(Simple x)
+	StreflopSimple __erfcf(StreflopSimple x)
 #else
-	Simple __erfcf(x)
-	Simple x;
+	StreflopSimple __erfcf(x)
+	StreflopSimple x;
 #endif
 {
 	int32_t hx,ix;
-	Simple R,S,P,Q,s,y,z,r;
+	StreflopSimple R,S,P,Q,s,y,z,r;
 	GET_FLOAT_WORD(hx,x);
 	ix = hx&0x7fffffff;
 	if(ix>=0x7f800000) {			/* erfc(nan)=nan */

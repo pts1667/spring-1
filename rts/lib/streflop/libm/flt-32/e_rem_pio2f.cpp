@@ -1,6 +1,6 @@
 /* See the import.pl script for potential modifications */
-/* e_rem_pio2f.c -- Simple version of e_rem_pio2.c
- * Conversion to Simple by Ian Lance Taylor, Cygnus Support, ian@cygnus.com.
+/* e_rem_pio2f.c -- StreflopSimple version of e_rem_pio2.c
+ * Conversion to StreflopSimple by Ian Lance Taylor, Cygnus Support, ian@cygnus.com.
  */
 
 /*
@@ -102,14 +102,14 @@ pio2_3  =  6.0770943833e-11f, /* 0x2e85a300 */
 pio2_3t =  6.1232342629e-17f; /* 0x248d3132 */
 
 #ifdef __STDC__
-	int32_t __ieee754_rem_pio2f(Simple x, Simple *y)
+	int32_t __ieee754_rem_pio2f(StreflopSimple x, StreflopSimple *y)
 #else
 	int32_t __ieee754_rem_pio2f(x,y)
-	Simple x,y[];
+	StreflopSimple x,y[];
 #endif
 {
-	Simple z,w,t,r,fn;
-	Simple tx[3];
+	StreflopSimple z,w,t,r,fn;
+	StreflopSimple tx[3];
 	int32_t e0,i,j,nx,n,ix,hx;
 
 	GET_FLOAT_WORD(hx,x);

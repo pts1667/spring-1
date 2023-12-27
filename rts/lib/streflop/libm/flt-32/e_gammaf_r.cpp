@@ -25,7 +25,7 @@
 
 namespace streflop_libm {
 Simple
-__ieee754_gammaf_r (Simple x, int *signgamp)
+__ieee754_gammaf_r (StreflopSimple x, int *signgamp)
 {
   /* We don't have a real gamma implementation now.  We'll use lgamma
      and the exp function.  But due to the required boundary

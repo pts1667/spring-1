@@ -1,6 +1,6 @@
 /* See the import.pl script for potential modifications */
-/* s_floorf.c -- Simple version of s_floor.c.
- * Conversion to Simple by Ian Lance Taylor, Cygnus Support, ian@cygnus.com.
+/* s_floorf.c -- StreflopSimple version of s_floor.c.
+ * Conversion to StreflopSimple by Ian Lance Taylor, Cygnus Support, ian@cygnus.com.
  */
 
 /*
@@ -32,16 +32,16 @@ static char rcsid[] = "$NetBSD: s_floorf.c,v 1.4f 1995/05/10 20:47:22 jtc Exp $"
 
 namespace streflop_libm {
 #ifdef __STDC__
-static const Simple huge = 1.0e30f;
+static const StreflopSimple huge = 1.0e30f;
 #else
-static Simple huge = 1.0e30f;
+static StreflopSimple huge = 1.0e30f;
 #endif
 
 #ifdef __STDC__
-	Simple __floorf(Simple x)
+	StreflopSimple __floorf(StreflopSimple x)
 #else
-	Simple __floorf(x)
-	Simple x;
+	StreflopSimple __floorf(x)
+	StreflopSimple x;
 #endif
 {
 	int32_t i0,j0;

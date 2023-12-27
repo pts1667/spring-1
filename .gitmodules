@@ -30,3 +30,6 @@
 [submodule "rts/lib/cereal"]
 	path = rts/lib/cereal
 	url = https://github.com/USCiLab/cereal.git
+[submodule "rts/lib/ljSpring"]
+	path = rts/lib/ljSpring
+	url = https://github.com/pts1667/ljSpring.git

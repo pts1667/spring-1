@@ -1,6 +1,6 @@
 /* See the import.pl script for potential modifications */
-/* s_scalbnf.c -- Simple version of s_scalbn.c.
- * Conversion to Simple by Ian Lance Taylor, Cygnus Support, ian@cygnus.com.
+/* s_scalbnf.c -- StreflopSimple version of s_scalbn.c.
+ * Conversion to StreflopSimple by Ian Lance Taylor, Cygnus Support, ian@cygnus.com.
  */
 
 /*
@@ -33,10 +33,10 @@ huge   = 1.0e+30f,
 tiny   = 1.0e-30f;
 
 #ifdef __STDC__
-	Simple __scalblnf (Simple x, long int n)
+	StreflopSimple __scalblnf (StreflopSimple x, long int n)
 #else
-	Simple __scalblnf (x,n)
-	Simple x; long int n;
+	StreflopSimple __scalblnf (x,n)
+	StreflopSimple x; long int n;
 #endif
 {
 	int32_t k,ix;

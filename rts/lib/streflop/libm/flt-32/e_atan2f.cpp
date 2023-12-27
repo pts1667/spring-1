@@ -1,6 +1,6 @@
 /* See the import.pl script for potential modifications */
-/* e_atan2f.c -- Simple version of e_atan2.c.
- * Conversion to Simple by Ian Lance Taylor, Cygnus Support, ian@cygnus.com.
+/* e_atan2f.c -- StreflopSimple version of e_atan2.c.
+ * Conversion to StreflopSimple by Ian Lance Taylor, Cygnus Support, ian@cygnus.com.
  */
 
 /*
@@ -35,13 +35,13 @@ pi      = 3.1415927410e+00f,  /* 0x40490fdb */
 pi_lo   = -8.7422776573e-08f; /* 0xb3bbbd2e */
 
 #ifdef __STDC__
-	Simple __ieee754_atan2f(Simple y, Simple x)
+	StreflopSimple __ieee754_atan2f(StreflopSimple y, StreflopSimple x)
 #else
-	Simple __ieee754_atan2f(y,x)
-	Simple  y,x;
+	StreflopSimple __ieee754_atan2f(y,x)
+	StreflopSimple  y,x;
 #endif
 {
-	Simple z;
+	StreflopSimple z;
 	int32_t k,m,hx,hy,ix,iy;
 
 	GET_FLOAT_WORD(hx,x);

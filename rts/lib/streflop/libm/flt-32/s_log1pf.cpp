@@ -1,6 +1,6 @@
 /* See the import.pl script for potential modifications */
-/* s_log1pf.c -- Simple version of s_log1p.c.
- * Conversion to Simple by Ian Lance Taylor, Cygnus Support, ian@cygnus.com.
+/* s_log1pf.c -- StreflopSimple version of s_log1p.c.
+ * Conversion to StreflopSimple by Ian Lance Taylor, Cygnus Support, ian@cygnus.com.
  */
 
 /*
@@ -39,19 +39,19 @@ Lp6 = 1.5313838422e-01f, /* 3E1CD04F */
 Lp7 = 1.4798198640e-01f; /* 3E178897 */
 
 #ifdef __STDC__
-static const Simple zero = 0.0f;
+static const StreflopSimple zero = 0.0f;
 #else
-static Simple zero = 0.0f;
+static StreflopSimple zero = 0.0f;
 #endif
 
 #ifdef __STDC__
-	Simple __log1pf(Simple x)
+	StreflopSimple __log1pf(StreflopSimple x)
 #else
-	Simple __log1pf(x)
-	Simple x;
+	StreflopSimple __log1pf(x)
+	StreflopSimple x;
 #endif
 {
-	Simple hfsq,f,c,s,z,R,u;
+	StreflopSimple hfsq,f,c,s,z,R,u;
 	int32_t k,hx,hu,ax;
 
 	GET_FLOAT_WORD(hx,x);

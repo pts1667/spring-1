@@ -3743,7 +3743,7 @@ int CLuaHandle::CallOutDelayByFrames(lua_State* L)
 	if (argCount < 2 || !lua_isnumber(L, 1) || !lua_isfunction(L, 2))
 		luaL_error(L, "Incorrect arguments to DelayByFrames(positive number frameDelay, func[, args])");
 
-	const auto frameDelay = lua_tointeger(L, 1);
+	const auto frameDelay = (int)lua_tointeger(L, 1);
 	if (frameDelay <= 0)
 		luaL_error(L, "Incorrect arguments to DelayByFrames(positive number frameDelay, func[, args])");
 

@@ -1302,7 +1302,7 @@ void SetRulesParam(lua_State* L, const char* caller, int offset,
 	// set the value of the parameter
 	if (lua_israwnumber(L, valIndex)) {
 		param.value.emplace <float> (lua_tofloat(L, valIndex));
-	} else if (lua_israwboolean(L, valIndex)) {
+	} else if (lua_isboolean(L, valIndex)) {
 		param.value.emplace <bool> (lua_toboolean(L, valIndex));
 	} else if (lua_isstring(L, valIndex)) {
 		param.value.emplace <std::string> (lua_tostring(L, valIndex));
@@ -2999,7 +2999,7 @@ int LuaSyncedCtrl::SetUnitShieldRechargeDelay(lua_State* L)
 
 	auto shield = static_cast <CPlasmaRepulser*> (unit->shieldWeapon);
 	if (lua_isnumber(L, 2)) {
-		const size_t index = lua_tointeger(L, 2) - LUA_WEAPON_BASE_INDEX;
+		const size_t index = (int)lua_tointeger(L, 2) - LUA_WEAPON_BASE_INDEX;
 		if (index < unit->weapons.size())
 			shield = dynamic_cast <CPlasmaRepulser*> (unit->weapons[index]);
 	}
@@ -3486,7 +3486,7 @@ int LuaSyncedCtrl::SetUnitPosErrorParams(lua_State* L)
 	unit->nextPosErrorUpdate = luaL_optint(L, 8, unit->nextPosErrorUpdate);
 
 	if (lua_isnumber(L, 9) && lua_isboolean(L, 10))
-		unit->SetPosErrorBit(std::clamp(lua_tointeger(L, 9), 0, teamHandler.ActiveAllyTeams()), lua_toboolean(L, 10));
+		unit->SetPosErrorBit(std::clamp((int)lua_tointeger(L, 9), 0, teamHandler.ActiveAllyTeams()), lua_toboolean(L, 10));
 
 	return 0;
 }
@@ -4296,11 +4296,11 @@ int LuaSyncedCtrl::SetFeatureResources(lua_State* L)
 	feature->defResources.metal  = std::max(0.0f, luaL_optfloat(L, 6, feature->defResources.metal));
 	feature->defResources.energy = std::max(0.0f, luaL_optfloat(L, 7, feature->defResources.energy));
 
-	feature->resources.metal  = std::clamp(luaL_checknumber(L, 2), 0.0f, feature->defResources.metal );
-	feature->resources.energy = std::clamp(luaL_checknumber(L, 3), 0.0f, feature->defResources.energy);
+	feature->resources.metal  = std::clamp((float)luaL_checknumber(L, 2), 0.0f, feature->defResources.metal );
+	feature->resources.energy = std::clamp((float)luaL_checknumber(L, 3), 0.0f, feature->defResources.energy);
 
-	feature->reclaimTime = std::clamp(luaL_optnumber(L, 4, feature->reclaimTime), 1.0f, 1000000.0f);
-	feature->reclaimLeft = std::clamp(luaL_optnumber(L, 5, feature->reclaimLeft), 0.0f,       1.0f);
+	feature->reclaimTime = std::clamp((float)luaL_optnumber(L, 4, feature->reclaimTime), 1.0f, 1000000.0f);
+	feature->reclaimLeft = std::clamp((float)luaL_optnumber(L, 5, feature->reclaimLeft), 0.0f,       1.0f);
 	return 0;
 }
 

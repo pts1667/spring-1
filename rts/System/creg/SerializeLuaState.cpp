@@ -10,7 +10,8 @@
 #include "System/TimeProfiler.h"
 #endif
 
-#include "lib/lua/src/ltable.h"
+#include "lib/ljSpring/luajit/src/lj_tab.h"
+#include "lib/ljSpring/luajit/src/lua.h"
 #include "System/UnorderedMap.hpp"
 #include "System/StringUtil.h"
 #include "System/Log/ILog.h"
@@ -26,7 +27,7 @@ struct creg_TString;
 
 #define ASSERT_SIZE(structName) static_assert(sizeof(creg_ ## structName) == sizeof(structName), #structName " Size mismatch");
 
-static_assert(LUAI_EXTRASPACE == 0, "LUAI_EXTRASPACE isn't 0");
+//static_assert(LUAI_EXTRASPACE == 0, "LUAI_EXTRASPACE isn't 0");
 
 class LuaContext{
 public:
@@ -85,124 +86,141 @@ static spring::unsynced_map<lua_CFunction, std::string> funcToName;
  * Converted from lobject.h
  */
 
-#define creg_CommonHeader creg_GCObject* next; lu_byte tt; lu_byte marked
+#define creg_CommonHeader creg_GCObject* next; char tt; char marked
 #define CR_COMMON_HEADER() CR_MEMBER(next), CR_MEMBER(tt), CR_MEMBER(marked)
 
 union creg_Value{
+/*
 	creg_GCObject *gc;
 	void *p;
 	lua_Number n;
 	int b;
+*/
 };
 
 struct creg_TValue {
 	CR_DECLARE_STRUCT(creg_TValue)
+/*
 	creg_Value value;
 	int tt;
 	void Serialize(creg::ISerializer* s);
+*/
 };
 
-ASSERT_SIZE(TValue)
+//ASSERT_SIZE(TValue)
 
 union creg_TKey {
+/*
 	struct {
 		creg_Value value;
 		int tt;
-		creg_Node *next;  /* for chaining */
+		creg_Node *next;  // for chaining
 	} nk;
 	creg_TValue tvk;
+*/
 };
 
 
 struct creg_Node {
 	CR_DECLARE_STRUCT(creg_Node)
+/*
 	creg_TValue i_val;
 	creg_TKey i_key;
 	void Serialize(creg::ISerializer* s);
+*/
 };
 
-ASSERT_SIZE(Node)
+//ASSERT_SIZE(Node)
 
 
 struct creg_Table {
 	CR_DECLARE_STRUCT(creg_Table)
+/*
 	creg_CommonHeader;
-	lu_byte flags;  /* 1<<p means tagmethod(p) is not present */
-	lu_byte lsizenode;  /* log2 of size of `node' array */
+	lu_byte flags;  // 1<<p means tagmethod(p) is not present
+	lu_byte lsizenode;  // log2 of size of `node' array
 	creg_Table *metatable;
-	creg_TValue *array;  /* array part */
+	creg_TValue *array;  // array part
 	creg_Node *node;
-	creg_Node *lastfree;  /* any free position is before this position */
+	creg_Node *lastfree;  // any free position is before this position
 	creg_GCObject *gclist;
-	int sizearray;  /* size of `array' array */
+	int sizearray;  // size of `array' array
 	void Serialize(creg::ISerializer* s);
 	void PostLoad();
+*/
 };
 
-ASSERT_SIZE(Table)
+//ASSERT_SIZE(Table)
 
 
 struct creg_LocVar {
 	CR_DECLARE_STRUCT(creg_LocVar)
+/*
 	creg_TString *varname;
-	int startpc;  /* first point where variable is active */
-	int endpc;    /* first point where variable is dead */
+	int startpc;  // first point where variable is active
+	int endpc;    // first point where variable is dead
+*/
 };
 
-ASSERT_SIZE(LocVar)
+//ASSERT_SIZE(LocVar)
 
 
 struct creg_Proto {
 	CR_DECLARE_STRUCT(creg_Proto)
+/*
 	creg_CommonHeader;
-	creg_TValue *k;  /* constants used by the function */
+	creg_TValue *k;  // constants used by the function
 	Instruction *code;
-	creg_Proto **p;  /* functions defined inside the function */
-	int *lineinfo;  /* map from opcodes to source lines */
-	creg_LocVar *locvars;  /* information about local variables */
-	creg_TString **upvalues;  /* upvalue names */
+	creg_Proto **p;  // functions defined inside the function
+	int *lineinfo;  // map from opcodes to source lines
+	creg_LocVar *locvars;  // information about local variables
+	creg_TString **upvalues;  // upvalue names
 	creg_TString *source;
 	int sizeupvalues;
-	int sizek;  /* size of `k' */
+	int sizek;  // size of `k'
 	int sizecode;
 	int sizelineinfo;
-	int sizep;  /* size of `p' */
+	int sizep;  // size of `p'
 	int sizelocvars;
 	int linedefined;
 	int lastlinedefined;
 	creg_GCObject *gclist;
-	lu_byte nups;  /* number of upvalues */
+	lu_byte nups;  // number of upvalues
 	lu_byte numparams;
 	lu_byte is_vararg;
 	lu_byte maxstacksize;
 	void Serialize(creg::ISerializer* s);
+*/
 };
 
 
-ASSERT_SIZE(Proto)
+//ASSERT_SIZE(Proto)
 
 
 struct creg_UpVal {
 	CR_DECLARE_STRUCT(creg_UpVal)
+/*
 	creg_CommonHeader;
-	creg_TValue *v;  /* points to stack or to its own value */
+	creg_TValue *v;  // points to stack or to its own value
 	union {
-		creg_TValue value;  /* the value (when closed) */
-		struct {  /* double linked list (when open) */
+		creg_TValue value;  // the value (when closed)
+		struct {  // double linked list (when open)
 			struct creg_UpVal *prev;
 			struct creg_UpVal *next;
 		} l;
 	} u;
 	void Serialize(creg::ISerializer* s);
+*/
 };
 
-ASSERT_SIZE(UpVal)
+//ASSERT_SIZE(UpVal)
 
 
 struct creg_TString {
 	CR_DECLARE_STRUCT(creg_TString)
+/*
 	union {
-		L_Umaxalign dummy;  /* ensures maximum alignment for strings */
+		L_Umaxalign dummy;  // ensures maximum alignment for strings
 		struct {
 			creg_CommonHeader;
 			lu_byte reserved;
@@ -212,9 +230,10 @@ struct creg_TString {
 	} u;
 	void Serialize(creg::ISerializer* s);
 	size_t GetSize();
+*/
 };
 
-ASSERT_SIZE(TString)
+//ASSERT_SIZE(TString)
 
 #define creg_ClosureHeader \
 	creg_CommonHeader; lu_byte isC; lu_byte nupvalues; creg_GCObject *gclist; \
@@ -225,38 +244,45 @@ ASSERT_SIZE(TString)
 
 struct creg_CClosure {
 	CR_DECLARE_STRUCT(creg_CClosure)
+/*
 	creg_ClosureHeader;
 	lua_CFunction f;
 	creg_TValue upvalue[1];
 	void Serialize(creg::ISerializer* s);
 	size_t GetSize();
+*/
 };
 
-ASSERT_SIZE(CClosure)
+//ASSERT_SIZE(CClosure)
 
 struct creg_LClosure {
 	CR_DECLARE_STRUCT(creg_LClosure)
+/*
 	creg_ClosureHeader;
 	creg_Proto *p;
 	creg_UpVal *upvals[1];
 	void Serialize(creg::ISerializer* s);
 	size_t GetSize();
+*/
 };
 
-ASSERT_SIZE(LClosure)
+//ASSERT_SIZE(LClosure)
 
 union creg_Closure {
+/*
 	creg_CClosure c;
 	creg_LClosure l;
+*/
 };
 
-ASSERT_SIZE(Closure)
+//ASSERT_SIZE(Closure)
 
 
 struct creg_Udata {
 	CR_DECLARE_STRUCT(creg_Udata)
+/*
 	union {
-		L_Umaxalign dummy;  /* ensures maximum alignment for strings */
+		L_Umaxalign dummy;  // ensures maximum alignment for strings
 		struct {
 			creg_CommonHeader;
 			creg_Table *metatable;
@@ -266,14 +292,17 @@ struct creg_Udata {
 	} u;
 	void Serialize(creg::ISerializer* s);
 	size_t GetSize();
+*/
 };
 
-ASSERT_SIZE(Udata)
+//ASSERT_SIZE(Udata)
 
 
 creg_Node* GetDummyNode()
 {
 	static creg_Node* dummyNode = nullptr;
+
+	/*
 	if (dummyNode != nullptr)
 		return dummyNode;
 
@@ -282,6 +311,7 @@ creg_Node* GetDummyNode()
 	creg_Table* t = (creg_Table*) lua_topointer(L, -1);
 	dummyNode = t->node;
 	lua_close(L);
+	*/
 
 	return dummyNode;
 }
@@ -292,43 +322,46 @@ creg_Node* GetDummyNode()
  */
 
 struct creg_stringtable {
+/*
 	CR_DECLARE_STRUCT(creg_stringtable)
 	creg_GCObject **hash;
-	lu_int32 nuse;  /* number of elements */
+	lu_int32 nuse;  // number of elements
 	int size;
 	void Serialize(creg::ISerializer* s);
+*/
 };
 
-ASSERT_SIZE(stringtable)
+//ASSERT_SIZE(stringtable)
 
 
 struct creg_global_State {
 	CR_DECLARE_STRUCT(creg_global_State)
-	creg_stringtable strt;  /* hash table for strings */
-	lua_Alloc frealloc;  /* function to reallocate memory */
-	void *ud;         /* auxiliary data to `frealloc' */
+/*
+	creg_stringtable strt;  // hash table for strings
+	lua_Alloc frealloc;  // function to reallocate memory
+	void *ud;         // auxiliary data to `frealloc'
 	lu_byte currentwhite;
-	lu_byte gcstate;  /* state of garbage collector */
-	int sweepstrgc;  /* position of sweep in `strt' */
-	creg_GCObject *rootgc;  /* list of all collectable objects */
-	creg_GCObject **sweepgc;  /* position of sweep in `rootgc' */
-	creg_GCObject *gray;  /* list of gray objects */
-	creg_GCObject *grayagain;  /* list of objects to be traversed atomically */
-	creg_GCObject *weak;  /* list of weak tables (to be cleared) */
-	creg_GCObject *tmudata;  /* last element of list of userdata to be GC */
-	Mbuffer buff;  /* temporary buffer for string concatentation */
+	lu_byte gcstate;  // state of garbage collector
+	int sweepstrgc;  // position of sweep in `strt'
+	creg_GCObject *rootgc;  // list of all collectable objects
+	creg_GCObject **sweepgc;  // position of sweep in `rootgc'
+	creg_GCObject *gray;  // list of gray objects
+	creg_GCObject *grayagain;  /* list of objects to be traversed atomically
+	creg_GCObject *weak;  // list of weak tables (to be cleared)
+	creg_GCObject *tmudata;  // last element of list of userdata to be GC
+	Mbuffer buff;  // temporary buffer for string concatentation
 	lu_mem GCthreshold;
-	lu_mem totalbytes;  /* number of bytes currently allocated */
-	lu_mem estimate;  /* an estimate of number of bytes actually in use */
-	lu_mem gcdept;  /* how much GC is `behind schedule' */
-	int gcpause;  /* size of pause between successive GCs */
-	int gcstepmul;  /* GC `granularity' */
-	lua_CFunction panic;  /* to be called in unprotected errors */
+	lu_mem totalbytes;  // number of bytes currently allocated
+	lu_mem estimate;  // an estimate of number of bytes actually in use
+	lu_mem gcdept;  // how much GC is `behind schedule'
+	int gcpause;  // size of pause between successive GCs
+	int gcstepmul;  // GC `granularity'
+	lua_CFunction panic;  // to be called in unprotected errors
 	creg_TValue l_registry;
 	creg_lua_State *mainthread;
-	creg_UpVal uvhead;  /* head of double-linked list of all open upvalues */
-	creg_Table *mt[NUM_TAGS];  /* metatables for basic types */
-	creg_TString *tmname[TM_N];  /* array with tag-method names */
+	creg_UpVal uvhead;  // head of double-linked list of all open upvalues
+	creg_Table *mt[NUM_TAGS];  // metatables for basic types
+	creg_TString *tmname[TM_N];  // array with tag-method names
 
 	//SPRING additions
 	lua_Func_fopen  fopen_func;
@@ -338,47 +371,52 @@ struct creg_global_State {
 	lua_Func_remove remove_func;
 	lua_Func_rename rename_func;
 	void Serialize(creg::ISerializer* s);
+*/
 };
 
-ASSERT_SIZE(global_State)
+//ASSERT_SIZE(global_State)
 
 
 struct creg_lua_State {
 	CR_DECLARE_STRUCT(creg_lua_State)
+	int dummy;
+/*
 	creg_CommonHeader;
 	lu_byte status;
-	StkId top;  /* first free slot in the stack */
-	StkId base;  /* base of current function */
+	StkId top;  // first free slot in the stack
+	StkId base;  // base of current function
 	creg_global_State *l_G;
-	CallInfo *ci;  /* call info for current function */
-	const Instruction *savedpc;  /* `savedpc' of current function */
-	StkId stack_last;  /* last free slot in the stack */
-	StkId stack;  /* stack base */
-	CallInfo *end_ci;  /* points after end of ci array*/
-	CallInfo *base_ci;  /* array of CallInfo's */
+	CallInfo *ci;  // call info for current function
+	const Instruction *savedpc;  // `savedpc' of current function
+	StkId stack_last;  // last free slot in the stack
+	StkId stack;  // stack base
+	CallInfo *end_ci;  // points after end of ci array
+	CallInfo *base_ci;  // array of CallInfo's
 	int stacksize;
-	int size_ci;  /* size of array `base_ci' */
-	unsigned short nCcalls;  /* number of nested C calls */
-	unsigned short baseCcalls;  /* nested C calls when resuming coroutine */
+	int size_ci;  // size of array `base_ci'
+	unsigned short nCcalls;  // number of nested C calls
+	unsigned short baseCcalls;  // nested C calls when resuming coroutine
 	lu_byte hookmask;
 	lu_byte allowhook;
 	int basehookcount;
 	int hookcount;
 	lua_Hook hook;
-	creg_TValue l_gt;  /* table of globals */
-	creg_TValue env;  /* temporary place for environments */
-	creg_GCObject *openupval;  /* list of open upvalues in this stack */
+	creg_TValue l_gt;  // table of globals
+	creg_TValue env;  // temporary place for environments
+	creg_GCObject *openupval;  // list of open upvalues in this stack
 	creg_GCObject *gclist;
-	struct lua_longjmp *errorJmp;  /* current error recover point */
-	ptrdiff_t errfunc;  /* current error handling function (stack index) */
+	struct lua_longjmp *errorJmp;  // current error recover point
+	ptrdiff_t errfunc;  // current error handling function (stack index)
 	void Serialize(creg::ISerializer* s);
 	void PostLoad();
+*/
 };
 
-ASSERT_SIZE(lua_State)
+//ASSERT_SIZE(lua_State)
 
 
 union creg_GCObject {
+	/*
 	GCheader gch;
 	creg_TString ts;
 	creg_Udata u;
@@ -387,6 +425,7 @@ union creg_GCObject {
 	creg_Proto p;
 	creg_UpVal uv;
 	creg_lua_State th;
+	*/
 };
 
 
@@ -399,6 +438,7 @@ class ObjectPointerType<creg_GCObject> : public IType
 public:
 	ObjectPointerType() : IType(sizeof(creg_GCObject*)) { }
 	void Serialize(ISerializer *s, void *instance) override{
+		/*
 		void **ptr = (void**)instance;
 		int tt;
 		creg_GCObject *gco = (creg_GCObject *) *ptr;
@@ -440,6 +480,7 @@ public:
 		}
 
 		s->SerializeObjectPtr(ptr, c);
+		*/
 	}
 	std::string GetName() const override {
 		return "creg_GCObject*";
@@ -454,12 +495,12 @@ struct creg_LG {
 	creg_global_State g;
 };
 
-
+/*
 CR_BIND_POOL(creg_TValue, , allocProtector, freeProtector)
 CR_REG_METADATA(creg_TValue, (
-	CR_IGNORED(value), //union
-	CR_MEMBER(tt),
-	CR_SERIALIZER(Serialize)
+	//CR_IGNORED(value), //union
+	//CR_MEMBER(tt),
+	//CR_SERIALIZER(Serialize)
 ))
 
 
@@ -613,7 +654,12 @@ CR_REG_METADATA(creg_global_State, (
 	CR_SERIALIZER(Serialize)
 ))
 
-
+*/
+CR_BIND_POOL(creg_lua_State, , luaContext.alloc, freeProtector)
+CR_REG_METADATA(creg_lua_State, (
+	CR_IGNORED(dummy)
+))
+/*
 CR_BIND_POOL(creg_lua_State, , luaContext.alloc, freeProtector)
 CR_REG_METADATA(creg_lua_State, (
 	CR_COMMON_HEADER(),
@@ -652,6 +698,7 @@ CR_REG_METADATA(creg_LG, (
 	CR_MEMBER(l),
 	CR_MEMBER(g)
 ))
+*/
 
 
 template<typename T, typename C>
@@ -673,8 +720,10 @@ inline void SerializeCVector(creg::ISerializer* s, T** vecPtr, C count)
 
 template<typename T>
 void SerializePtr(creg::ISerializer* s, T** t) {
+	/*
 	creg::ObjectPointerType<T> opt;
 	opt.Serialize(s, t);
+	*/
 }
 
 template<typename T>
@@ -684,6 +733,7 @@ void SerializeInstance(creg::ISerializer* s, T* t) {
 
 void SerializeLightUserData(creg::ISerializer* s, void **p)
 {
+	/*
 	if (!inClosure) {
 		s->SerializeInt(p, sizeof(*p));
 		return;
@@ -723,9 +773,10 @@ void SerializeLightUserData(creg::ISerializer* s, void **p)
 		}
 	}
 #endif
+	*/
 }
 
-
+/*
 void creg_TValue::Serialize(creg::ISerializer* s)
 {
 	switch(tt) {
@@ -781,6 +832,7 @@ void creg_Table::Serialize(creg::ISerializer* s)
 
 	if (!s->IsWriting())
 		lastfree = node + lastfreeOffset;
+
 }
 
 void creg_Table::PostLoad()
@@ -1031,6 +1083,7 @@ void creg_lua_State::Serialize(creg::ISerializer* s)
 }
 
 
+
 void creg_lua_State::PostLoad()
 {
 	if (base_ci == ci)
@@ -1086,12 +1139,13 @@ void creg_global_State::Serialize(creg::ISerializer* s)
 		}
 	}
 }
-
+*/
 
 namespace creg {
 
 void SerializeLuaState(creg::ISerializer* s, lua_State** L)
 {
+	/*
 	creg_LG* clg;
 	if (s->IsWriting()) {
 		assert(*L != nullptr);
@@ -1107,6 +1161,7 @@ void SerializeLuaState(creg::ISerializer* s, lua_State** L)
 	}
 
 	SerializeInstance(s, clg);
+	*/
 }
 
 void SerializeLuaThread(creg::ISerializer* s, lua_State** L)
@@ -1133,6 +1188,7 @@ void RecursiveAutoRegisterTable(const std::string& handle, lua_State* L, int dep
 
 void RecursiveAutoRegisterFunction(const std::string& handle, lua_State* L, int depth)
 {
+	/*
 	if (depth > MAX_REC_DEPTH)
 		return;
 
@@ -1145,12 +1201,13 @@ void RecursiveAutoRegisterFunction(const std::string& handle, lua_State* L, int 
 			RecursiveAutoRegisterTable(newHandle, L, depth + 1);
 		}
 	}
-
+	*/
 }
 
 
 void RecursiveAutoRegisterTable(const std::string& handle, lua_State* L, int depth)
 {
+	/*
 	if (depth > MAX_REC_DEPTH)
 		return;
 
@@ -1173,10 +1230,12 @@ void RecursiveAutoRegisterTable(const std::string& handle, lua_State* L, int dep
 			lua_pop(L, 1);
 		}
 	}
+	*/
 }
 
 void AutoRegisterCFunctions(const std::string& handle, lua_State* L)
 {
+	/*
 #ifndef UNIT_TEST
 	ScopedOnceTimer timer("creg::AutoRegisterCFunctions(" + handle + ")");
 #endif
@@ -1186,6 +1245,7 @@ void AutoRegisterCFunctions(const std::string& handle, lua_State* L)
 	lua_getregistry(L);
 	RecursiveAutoRegisterTable(handle, L, 0);
 	lua_pop(L, 1);
+	*/
 }
 
 void UnregisterAllCFunctions() {
@@ -1195,6 +1255,6 @@ void UnregisterAllCFunctions() {
 
 void CopyLuaContext(lua_State* L)
 {
-	luaContext.SetContext(G(L)->ud, G(L)->frealloc, G(L)->panic);
+	//luaContext.SetContext(G(L)->ud, G(L)->frealloc, G(L)->panic);
 }
 }

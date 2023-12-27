@@ -1,6 +1,6 @@
 /* See the import.pl script for potential modifications */
-/* k_tanf.c -- Simple version of k_tan.c
- * Conversion to Simple by Ian Lance Taylor, Cygnus Support, ian@cygnus.com.
+/* k_tanf.c -- StreflopSimple version of k_tan.c
+ * Conversion to StreflopSimple by Ian Lance Taylor, Cygnus Support, ian@cygnus.com.
  */
 
 /*
@@ -22,9 +22,9 @@ static char rcsid[] = "$NetBSD: k_tanf.c,v 1.4f 1995/05/10 20:46:39 jtc Exp $";
 #include "math_private.h"
 namespace streflop_libm {
 #ifdef __STDC__
-static const Simple 
+static const StreflopSimple 
 #else
-static Simple 
+static StreflopSimple 
 #endif
 one   =  1.0000000000e+00f, /* 0x3f800000 */
 pio4  =  7.8539812565e-01f, /* 0x3f490fda */
@@ -46,13 +46,13 @@ T[] =  {
 };
 
 #ifdef __STDC__
-	Simple __kernel_tanf(Simple x, Simple y, int iy)
+	StreflopSimple __kernel_tanf(StreflopSimple x, StreflopSimple y, int iy)
 #else
-	Simple __kernel_tanf(x, y, iy)
-	Simple x,y; int iy;
+	StreflopSimple __kernel_tanf(x, y, iy)
+	StreflopSimple x,y; int iy;
 #endif
 {
-	Simple z,r,v,w,s;
+	StreflopSimple z,r,v,w,s;
 	int32_t ix,hx;
 	GET_FLOAT_WORD(hx,x);
 	ix = hx&0x7fffffff;	/* high word of |x| */
@@ -88,7 +88,7 @@ T[] =  {
 	else {		/* if allow error up to 2 ulp, 
 			   simply return -1.0f/(x+r) here */
      /*  compute -1.0f/(x+r) accurately */
-	    Simple a,t;
+	    StreflopSimple a,t;
 	    int32_t i;
 	    z  = w;
 	    GET_FLOAT_WORD(i,z);

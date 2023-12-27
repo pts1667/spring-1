@@ -4,7 +4,7 @@
 #include "System/TimeProfiler.h"
 #include "System/Misc/SpringTime.h"
 #include "lib/streflop/streflop_cond.h"
-#include "lib/lua/include/LuaUser.h"
+#include "lib/ljSpring/include/LuaUser.h"
 
 
 #define __USE_MINGW_ANSI_STDIO 1 // use __mingw_sprintf() for sprintf(), instead of __builtin_sprintf()

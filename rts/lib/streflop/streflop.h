@@ -28,10 +28,13 @@ namespace streflop {
 
 // Handle the 6 cells of the configuration array. See README.txt
 #if defined(STREFLOP_SSE)
-
+    #ifndef StreflopSimple
+        #define StreflopSimple float
+        #define StreflopDouble double
+    #endif
     // SSE always uses native types, denormals are handled by FPU flags
-    typedef float Simple;
-    typedef double Double;
+    typedef StreflopSimple Simple;
+    typedef StreflopDouble Double;
     #undef Extended
 
 #elif defined(STREFLOP_X87)
@@ -39,12 +42,21 @@ namespace streflop {
     // X87 uses a wrapper for no denormals case
 #if defined(STREFLOP_NO_DENORMALS)
 #include "X87DenormalSquasher.h"
+    #ifndef StreflopSimple
+        #define StreflopSimple X87DenormalSquasher<float>
+        #define StreflopDouble X87DenormalSquasher<double>
+    #endif
     typedef X87DenormalSquasher<float> Simple;
     typedef X87DenormalSquasher<double> Double;
     typedef X87DenormalSquasher<long double> Extended;
     #define Extended Extended
 
 #else
+    #ifndef StreflopSimple
+        #define StreflopSimple float
+        #define StreflopDouble double
+    #endif
+    
     // Use FPU flags for x87 with denormals
     typedef float Simple;
     typedef double Double;

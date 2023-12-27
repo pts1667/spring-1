@@ -39,7 +39,7 @@ find_package_static(DevIL REQUIRED)
 
 ### Assemble common incude dirs
 include_directories(BEFORE lib)
-include_directories(BEFORE lib/lua/include)
+include_directories(BEFORE lib/ljSpring/include)
 include_directories(${CMAKE_SOURCE_DIR}/include/AL)
 include_directories(${SPRING_MINIZIP_INCLUDE_DIR})
 include_directories(${CMAKE_CURRENT_SOURCE_DIR})
@@ -85,7 +85,7 @@ endif (UNIX AND NOT MINGW)
 find_package_static(ZLIB REQUIRED)
 list(APPEND engineCommonLibraries ${IL_LIBRARIES} ${JPEG_LIBRARY} ${PNG_LIBRARY} ${TIFF_LIBRARY} ${GIF_LIBRARY})
 list(APPEND engineCommonLibraries 7zip prd::jsoncpp ${SPRING_MINIZIP_LIBRARY} ${ZLIB_LIBRARY} Tracy::TracyClient)
-list(APPEND engineCommonLibraries lua luasocket archives assimp
+list(APPEND engineCommonLibraries luajitSpring luasocket archives assimp
 	gflags_nothreads_static)
 if (ENABLE_STREFLOP)
 	list(APPEND engineCommonLibraries streflop)

@@ -24,7 +24,7 @@
 #include "System/TimeProfiler.h"
 #include "System/Threading/ThreadPool.h"
 #include "System/SafeUtil.h"
-#include "lib/lua/include/LuaUser.h" // spring_lua_alloc_get_stats
+#include "lib/ljSpring/include/LuaUser.h" // spring_lua_alloc_get_stats
 
 ProfileDrawer* ProfileDrawer::instance = nullptr;
 
