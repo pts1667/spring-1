@@ -52,6 +52,8 @@ CLuaIntro::CLuaIntro()
 	if (!IsValid())
 		return;
 
+	luaJIT_setmode(L, 0, LUAJIT_MODE_ON);
+
 	const std::string file = "LuaIntro/main.lua";
 	std::string code = LoadFile(file);
 

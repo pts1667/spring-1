@@ -121,6 +121,8 @@ void LuaParser::SetupLua(bool isSyncedCtxt, bool isDefsParser)
 
 void LuaParser::SetupEnv(bool isSyncedCtxt, bool isDefsParser)
 {
+	luaJIT_setmode(L, 0, LUAJIT_MODE_ON);
+	
 	LUA_OPEN_LIB(L, luaopen_base);
 	LUA_OPEN_LIB(L, luaopen_math);
 	LUA_OPEN_LIB(L, luaopen_table);

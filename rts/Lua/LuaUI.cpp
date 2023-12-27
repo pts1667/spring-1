@@ -72,6 +72,8 @@ CLuaUI::CLuaUI()
 
 	if (!IsValid())
 		return;
+	
+	luaJIT_setmode(L, 0, LUAJIT_MODE_ON);
 
 	UpdateTeams();
 

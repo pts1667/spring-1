@@ -83,6 +83,8 @@ bool CUnsyncedLuaHandle::Init(std::string code, const std::string& file)
 	if (!IsValid())
 		return false;
 
+	luaJIT_setmode(L, 0, LUAJIT_MODE_ON);
+
 	// load the standard libraries
 	LUA_OPEN_LIB(L, luaopen_base);
 	LUA_OPEN_LIB(L, luaopen_math);

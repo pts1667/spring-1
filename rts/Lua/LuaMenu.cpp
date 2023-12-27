@@ -52,6 +52,8 @@ CLuaMenu::CLuaMenu()
 	if (!IsValid())
 		return;
 
+	luaJIT_setmode(L, 0, LUAJIT_MODE_ON);
+
 	queuedAction = ACTION_NOVALUE;
 
 	const bool luaSocketEnabled = configHandler->GetBool("LuaSocketEnabled");
